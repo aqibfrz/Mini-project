@@ -1,4 +1,5 @@
 import pygame
+from ball import Ball
 from player import Player
 
 
@@ -6,7 +7,7 @@ from player import Player
 pygame.init()
 
 # creating a screen.
-display = pygame.display.set_mode((800, 600))
+display = pygame.display.set_mode((800, 800))
 pygame.display.update()
 
 # background
@@ -18,10 +19,12 @@ pygame.display.set_caption("ping pong")
 icon = pygame.image.load('ping-pong.png')
 pygame.display.set_icon(icon)
 
-player1 = Player(0, 480, 3.0, display)
+player1 = Player(0, display.get_height() - 60, 3.0, display)
 player1.moveToHorizontalCenter()
-player2 = Player(0, 9, 3.0, display)
+player2 = Player(0, 50, 3.0, display)
 player2.moveToHorizontalCenter()
+ballX = player1.x + (player1.image.get_width()/2)
+ball = Ball(ballX, player1.y, 2.0, display)
 
 # game infinite loop.
 running = True
@@ -41,14 +44,17 @@ while running:
         player2.moveLeft()
     if keys[pygame.K_d]:
         player2.moveRight()
+    if keys[pygame.K_SPACE] and not ball.isMoving:
+        ball.isMoving = True
 
     # Draw background
-    display.fill((0, 0, 0)) # RGB red ,blue ,green.
+    display.fill((0, 0, 0))  # RGB red ,blue ,green.
     display.blit(background, (-100, -100))
 
-    # Draw players
+    # Draw players and ball
     player1.draw()
     player2.draw()
+    ball.update(player1, player2)
 
     pygame.display.update()
 
