@@ -20,6 +20,10 @@ class Player:
         if self.x > (display.get_width() - self.image.get_width()): # Detect collision with screen right
             self.x = display.get_width() - self.image.get_width()
 
+    def moveToHorizontalCenter(self):
+        centerX = (int)((display.get_width() / 2) - (self.image.get_width() / 2))
+        self.x = centerX
+
 
 # initializing pygame
 pygame.init()
@@ -37,8 +41,10 @@ pygame.display.set_caption("ping pong")
 icon = pygame.image.load('ping-pong.png')
 pygame.display.set_icon(icon)
 
-player1 = Player(370, 480, 3.0)
-player2 = Player(299, 9, 3.0)
+player1 = Player(0, 480, 3.0)
+player1.moveToHorizontalCenter()
+player2 = Player(0, 9, 3.0)
+player2.moveToHorizontalCenter()
 
 # game infinite loop.
 running = True
