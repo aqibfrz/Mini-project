@@ -2,8 +2,8 @@ import pygame
 
 class Player:
     def __init__(self, xPosition, yPosition, speed) -> None:
-        self.x = xPosition
-        self.y = yPosition
+        self.x = xPosition # self.x is the top left corner's x position of the image
+        self.y = yPosition # self.y is the top left corner's y position of the image
         self.speed = speed
         self.image = pygame.image.load('player.png')
 
@@ -12,18 +12,17 @@ class Player:
 
     def moveLeft(self):
         self.x = self.x - self.speed
-        if self.x < 0:
+        if self.x < 0: # Detect collision with screen left
             self.x = 0
 
     def moveRight(self):
         self.x = self.x + self.speed
-        if self.x > 671:
-            self.x = 671
+        if self.x > (display.get_width() - self.image.get_width()): # Detect collision with screen right
+            self.x = display.get_width() - self.image.get_width()
 
 
 # initializing pygame
 pygame.init()
-
 
 # creating a screen.
 display = pygame.display.set_mode((800, 600))
