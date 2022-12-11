@@ -1,28 +1,5 @@
 import pygame
-
-class Player:
-    def __init__(self, xPosition, yPosition, speed) -> None:
-        self.x = xPosition # self.x is the top left corner's x position of the image
-        self.y = yPosition # self.y is the top left corner's y position of the image
-        self.speed = speed
-        self.image = pygame.image.load('player.png')
-
-    def draw(self):
-        display.blit(self.image, (self.x, self.y))
-
-    def moveLeft(self):
-        self.x = self.x - self.speed
-        if self.x < 0: # Detect collision with screen left
-            self.x = 0
-
-    def moveRight(self):
-        self.x = self.x + self.speed
-        if self.x > (display.get_width() - self.image.get_width()): # Detect collision with screen right
-            self.x = display.get_width() - self.image.get_width()
-
-    def moveToHorizontalCenter(self):
-        centerX = (int)((display.get_width() / 2) - (self.image.get_width() / 2))
-        self.x = centerX
+from player import Player
 
 
 # initializing pygame
@@ -41,9 +18,9 @@ pygame.display.set_caption("ping pong")
 icon = pygame.image.load('ping-pong.png')
 pygame.display.set_icon(icon)
 
-player1 = Player(0, 480, 3.0)
+player1 = Player(0, 480, 3.0, display)
 player1.moveToHorizontalCenter()
-player2 = Player(0, 9, 3.0)
+player2 = Player(0, 9, 3.0, display)
 player2.moveToHorizontalCenter()
 
 # game infinite loop.
