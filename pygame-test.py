@@ -30,7 +30,7 @@ def player1(x,y):
 #player2.
 playerImg2=pygame.image.load('delete (2).png')
 playerA=299
-playerB=8
+playerB=9
 playerA_change=0
 def player2(a,b):
     display.blit(playerImg2,(a,b))
