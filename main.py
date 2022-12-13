@@ -1,4 +1,5 @@
 import pygame
+
 from ball import Ball
 from player import Player
 
@@ -7,7 +8,7 @@ from player import Player
 pygame.init()
 
 # creating a screen.
-display = pygame.display.set_mode((800, 800))
+display = pygame.display.set_mode((600, 600))
 pygame.display.update()
 
 # background
@@ -19,12 +20,12 @@ pygame.display.set_caption("ping pong")
 icon = pygame.image.load('ping-pong.png')
 pygame.display.set_icon(icon)
 
-player1 = Player(0, display.get_height() - 60, 3.0, display)
+player1 = Player(0, display.get_height() - 60, 1.0, display)
 player1.moveToHorizontalCenter()
-player2 = Player(0, 50, 3.0, display)
+player2 = Player(0, 50, 1.0, display)
 player2.moveToHorizontalCenter()
 ballX = player1.x + (player1.image.get_width()/2)
-ball = Ball(ballX, player1.y, 2.0, display)
+ball = Ball(ballX, player1.y, 0.5, display)
 
 # game infinite loop.
 running = True

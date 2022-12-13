@@ -27,9 +27,9 @@ class Ball:
         # Detect collision with screen left
         if self.x < 0:
             self.x = 0
-            if (self.moveDirection == 'UP-LEFT'):
+            if self.moveDirection == 'UP-LEFT':
                 self.moveDirection = 'UP-RIGHT'
-            elif (self.moveDirection == 'DOWN-LEFT'):
+            elif self.moveDirection == 'DOWN-LEFT':
                 self.moveDirection = 'DOWN-RIGHT'
 
     def moveRight(self):
@@ -37,9 +37,9 @@ class Ball:
         # Detect collision with screen right
         if self.x > (self.screen.get_width() - self.image.get_width()):
             self.x = self.screen.get_width() - self.image.get_width()
-            if(self.moveDirection == 'UP-RIGHT'):
+            if self.moveDirection == 'UP-RIGHT':
                 self.moveDirection = 'UP-LEFT'
-            elif (self.moveDirection == 'DOWN-RIGHT'):
+            elif self.moveDirection == 'DOWN-RIGHT':
                 self.moveDirection = 'DOWN-LEFT'
 
     def moveUp(self):
@@ -79,8 +79,34 @@ class Ball:
             elif self.moveDirection == 'DOWN-LEFT':
                 self.moveDown()
                 self.moveLeft()
+
+            if self.y <= player2.y and (self.x >=player2.x and self.x<=player2.x+player2.image.get_width()):
+                if self.moveDirection == 'UP':
+                    list1 = [1, 2, 3]
+                    r1 = random.choice(list1)
+                    if r1 == 1:
+                        self.moveDirection = 'DOWN'
+                    elif r1 == 2:
+                        self.moveDirection = 'DOWN-LEFT'
+                    elif r1 == 3:
+                        self.moveDirection = 'DOWN-RIGHT'
+                else:
+                    self.moveDirection = 'DOWN'
+            elif self.y >= player1.y and (self.x >=player1.x and self.x<=player1.x+player1.image.get_width()):
+                if self.moveDirection == 'DOWN':
+                    list1 = [1, 2, 3]
+                    r1 = random.choice(list1)
+                    if r1 == 1:
+                        self.moveDirection = 'UP'
+                    elif r1 == 2:
+                        self.moveDirection = 'UP-LEFT'
+                    elif r1 == 3:
+                        self.moveDirection = 'UP-RIGHT'
+                else:
+                    self.moveDirection = 'UP'
+
         else:
             self.x = player1.x + ((player1.image.get_width()/2) - (self.image.get_width()/2))
-            self.y = player1.y
+            self.y = player1.y - self.image.get_height() - 5
         
         self.draw()
