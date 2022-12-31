@@ -11,7 +11,7 @@ class Ball:
         self.speed = speed
         self.screen = screen
         self.image = pygame.image.load('ping-pong.png')
-        self.image = pygame.transform.scale(self.image, (20, 20))
+        self.image = pygame.transform.scale(self.image, (25, 25))
         list1 = [1, 2, 3]
         r1 = random.choice(list1)
         if r1 == 1:
@@ -46,17 +46,19 @@ class Ball:
         self.y = self.y - self.speed
         # Detect collision with screen up
         if self.y < 0:
-            self.y = 0
-            # Player 1 won
-            self.moveDirection = 'DOWN'
+            self.isMoving = False
+            # self.y = 0
+            # # Player 1 won
+            # self.moveDirection = 'DOWN'
 
     def moveDown(self):
         self.y = self.y + self.speed
         # Detect collision with screen down
         if self.y > (self.screen.get_height() - self.image.get_height()):
+            self.isMoving = False
             # Player 2 won
-            self.y = self.screen.get_height() - self.image.get_height()
-            self.moveDirection = 'UP'
+            # self.y = self.screen.get_height() - self.image.get_height()
+            # self.moveDirection = 'UP'
 
     def draw(self):
         self.screen.blit(self.image, (self.x, self.y))
@@ -80,7 +82,7 @@ class Ball:
                 self.moveDown()
                 self.moveLeft()
 
-            if self.y <= player2.y and (self.x >=player2.x and self.x<=player2.x+player2.image.get_width()):
+            if (self.y >= player2.y and self.y <= player2.y + player2.image.get_height()) and (self.x >=player2.x and self.x<=player2.x+player2.image.get_width()):
                 if self.moveDirection == 'UP':
                     list1 = [1, 2, 3]
                     r1 = random.choice(list1)
@@ -92,7 +94,7 @@ class Ball:
                         self.moveDirection = 'DOWN-RIGHT'
                 else:
                     self.moveDirection = 'DOWN'
-            elif self.y >= player1.y and (self.x >=player1.x and self.x<=player1.x+player1.image.get_width()):
+            elif (self.y >= player1.y and self.y <= player1.y + player1.image.get_height()) and (self.x >=player1.x and self.x<=player1.x+player1.image.get_width()):
                 if self.moveDirection == 'DOWN':
                     list1 = [1, 2, 3]
                     r1 = random.choice(list1)

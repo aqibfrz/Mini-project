@@ -7,7 +7,7 @@ class Player:
         self.speed = speed
         self.screen = screen
         self.image = pygame.image.load('player.png')
-
+        self.image = pygame.transform.scale(self.image, (200, 25))
     def draw(self):
         self.screen.blit(self.image, (self.x, self.y))
 
