@@ -46,20 +46,22 @@ def game_loop():
         highest = f.read()
     score = 0
     while running:
-        # if ball.isMoving == False:
-        # #     with open("hiscore.txt", "w") as f:
-        # #         f.write(str(highest))
-        # #     display.fill(red)
-        # #     screen_score("game over! please enter to restart", white, 350, 270)
-        # #     pygame.display.update()
+        # if
+        # if score > highest:
+        #     highest = score
+        #     with open("hiscore.txt", "w") as f:
+        #         f.write(str(highest))
+        #     display.fill(red)
+            # screen_score("game over! please enter to restart", white, 350, 270)
+        #     pygame.display.update()
         #     for event in pygame.event.get():
         #         if event.type == pygame.QUIT:
         #             running = False
-        #     key = pygame.key.get_pressed()
+        #     key = pygame.key/.get_pressed()
         #     if key[pygame.K_RETURN]:
         #         ball.isMoving = True
-                 # game_loop()
-        #
+        #         game_loop()
+
         # else:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -90,9 +92,9 @@ def game_loop():
 
     # Draw players and ball
             player1.draw()
-            if player1.draw() == True:
-                score +=1
-            screen_score("score: " + str(score) + "                                                                                    high score: " + str(highest), red, 1, 1)
+
+            screen_score("Player 2 score: " + str(player2.score) + "                                                                                    high score: " + str(highest), red, 15, 1)
+            screen_score("Player 1 score: " + str(player1.score) + "                                                                                    high score: " + str(highest), red, 15, display.get_height() - 40)
             player2.draw()
             ball.update(player1, player2)
             pygame.display.update()

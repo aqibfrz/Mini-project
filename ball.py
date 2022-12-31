@@ -83,6 +83,7 @@ class Ball:
                 self.moveLeft()
 
             if (self.y >= player2.y and self.y <= player2.y + player2.image.get_height()) and (self.x >=player2.x and self.x<=player2.x+player2.image.get_width()):
+                player2.increase()
                 if self.moveDirection == 'UP':
                     list1 = [1, 2, 3]
                     r1 = random.choice(list1)
@@ -95,6 +96,7 @@ class Ball:
                 else:
                     self.moveDirection = 'DOWN'
             elif (self.y >= player1.y and self.y <= player1.y + player1.image.get_height()) and (self.x >=player1.x and self.x<=player1.x+player1.image.get_width()):
+                player1.increase()
                 if self.moveDirection == 'DOWN':
                     list1 = [1, 2, 3]
                     r1 = random.choice(list1)
