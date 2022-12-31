@@ -14,7 +14,7 @@ font = pygame.font.SysFont(None, 55)
 display = pygame.display.set_mode((1280, 660))
 
 # background
-background = pygame.image.load('b2.jpg')
+background = pygame.image.load('background.jpg')
 
 
 # title and icon.
