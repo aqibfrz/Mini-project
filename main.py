@@ -165,10 +165,11 @@ while run:
     display.fill(black)
     # a = pygame.transform.scale(welcome, (1300, 660))
     # display.blit(a, (0, 0))
-    screen_score("WELCOME TO GAME", white, display.get_width()/4.2, display.get_height()/8, font2)
-    screen_score("&", white, display.get_width()/2.3, display.get_height()/1.73, font2+20)
-    screen_score(name1.upper(), white, display.get_width()/3.5, display.get_height()/2.2, font2)
-    screen_score(name2.upper(), white, display.get_width()/3.5, display.get_height()/1.4, font2)
+    screen_score("WELCOME TO GAME", white, display.get_width()/4.2, display.get_height()/13, font2)
+    screen_score("&", white, display.get_width()/2.3, display.get_height()/2.05, font2+20)
+    screen_score("ENTER TO STAR GAME", white, display.get_width()/2.8, display.get_height()/1.1, font2 - 50)
+    screen_score(name1.upper(), white, display.get_width()/3.5, display.get_height()/3, font2)
+    screen_score(name2.upper(), white, display.get_width()/3.5, display.get_height()/1.5, font2)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
