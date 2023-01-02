@@ -1,10 +1,10 @@
 import pygame
 
 class Player:
-    def __init__(self, xPosition:int, yPosition:int, speed:float, screen:pygame.Surface) -> None:
+    def __init__(self, xPosition:int, yPosition:int, speed : float, screen:pygame.Surface) -> None:
         self.x = xPosition  # self.x is the top left corner's x position of the image
         self.y = yPosition  # self.y is the top left corner's y position of the image
-        self.speed = speed
+        self.speed = speed + 2
         self.screen = screen
         self.image = pygame.image.load('player.png')
         self.score = 0
@@ -13,7 +13,7 @@ class Player:
     def increase(self):
         self.score += 10
     def draw(self):
-        self.screen.blit(self.image, (self.x, self.y))
+        self.screen.blit(self.image, (self.x, self.y+5))
 
     def moveLeft(self):
         self.x = self.x - self.speed
