@@ -2,28 +2,29 @@ import pygame
 
 from ball import Ball
 from player import Player
+from single import single1
 
 # name1 = input("Enter player1 name: ")
 # name2 = input("Enter  player2 name: ")
-name1 = "team1"
-name2 = "team2"
+name1 = "player 1"
+name2 = "player 2"
 
 red = (255, 255, 255)
 black = (0, 0, 0)
-white = (0, 255, 255)
+white = (255, 255, 220)
 final_display_x = 180
 final_display_y = 300
 chance_width = 120
 # initializing pygame
 pygame.init()
-font2 = 100
+font2 = 70
 font1 = 35
 # creating a screen.
 display = pygame.display.set_mode((1280, 660))
 
 # background
 background = pygame.image.load('background.jpg')
-welcome = pygame.image.load('w1.jpg')
+welcome = pygame.image.load('bag1.jpg')
 
 
 
@@ -48,6 +49,7 @@ def game_loop():
     running = True
     # ball.isMoving = True
     n = 0
+    nk=0
     s = 0
     i = 5
     j = 5
@@ -56,7 +58,7 @@ def game_loop():
     player2 = Player(0, 10, 2.2, display)
     player2.moveToHorizontalCenter()
     ballX = player1.x + (player1.image.get_width() / 2)
-    ball = Ball(ballX, player1.y, 0.9, display)
+    ball = Ball(ballX, player1.y, 2.5, display)
 
     with open("highest.txt", "r") as f:
         highest = f.read()
@@ -91,8 +93,8 @@ def game_loop():
             if player1.score > n:
                 n+=10
                 i = i-1
-            if player2.score > n:
-                    n += 10
+            if player2.score > nk:
+                    nk += 10
                     j = j-1
             if i == 0:
                display.fill(black)
@@ -153,23 +155,24 @@ def game_loop():
                 screen_score(name2 + " " + "score: " + str(player2.score), red, 15, 15, font1) #+ "
                 screen_score(name1 + " " + "score: " + str(player1.score), red, 15, display.get_height() - 35, font1) #+ "                                                                     high score: " + str(highest), red, 15, display.get_height() - 40)
                 screen_score("chance: " + str(i), red, (display.get_width() - 15) - chance_width, 15, font1)
-                screen_score("chance: " + str(j), red, (display.get_width() - 15)- chance_width, display.get_height() - 35, font1)
+                screen_score("chance: " + str(j), red, (display.get_width() - 15) - chance_width, display.get_height() - 35, font1)
                 ball.update(player1, player2)
             pygame.display.update()
 
     pygame.quit()
     quit()
+
 # game_loop()
 run = True
 while run:
-    display.fill(black)
-    # a = pygame.transform.scale(welcome, (1300, 660))
-    # display.blit(a, (0, 0))
-    screen_score("WELCOME TO GAME", white, display.get_width()/4.2, display.get_height()/13, font2)
-    screen_score("&", white, display.get_width()/2.3, display.get_height()/2.05, font2+20)
-    screen_score("ENTER TO STAR GAME", white, display.get_width()/2.8, display.get_height()/1.1, font2 - 50)
-    screen_score(name1.upper(), white, display.get_width()/3.5, display.get_height()/3, font2)
-    screen_score(name2.upper(), white, display.get_width()/3.5, display.get_height()/1.5, font2)
+    # display.fill(black)
+    a = pygame.transform.scale(welcome, (1300, 660))
+    display.blit(a, (0, 0))
+    # screen_score("WELCOME TO GAME", white, display.get_width()/4.2, display.get_height()/13, font2)
+    # screen_score("&", white, display.get_width()/2.3, display.get_height()/2.05, font2+20)
+    # screen_score("ENTER TO STAR GAME", white, display.get_width()/2.8, display.get_height()/1.1, font2 - 50)
+    screen_score(name1.upper(), white, display.get_width()/22, display.get_height()/5.65, font2)
+    screen_score(name2.upper(), white, display.get_width()/1.447, display.get_height()/1.297, font2)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False

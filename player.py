@@ -4,7 +4,7 @@ class Player:
     def __init__(self, xPosition:int, yPosition:int, speed : float, screen:pygame.Surface) -> None:
         self.x = xPosition  # self.x is the top left corner's x position of the image
         self.y = yPosition  # self.y is the top left corner's y position of the image
-        self.speed = speed + 2
+        self.speed = speed + 2.5
         self.screen = screen
         self.image = pygame.image.load('player.png')
         self.score = 0

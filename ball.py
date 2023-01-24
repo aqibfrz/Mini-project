@@ -8,7 +8,7 @@ class Ball:
     def __init__(self, xPosition: int, yPosition: int, speed: float, screen: pygame.Surface) -> None:
         self.x = xPosition  # self.x is the top left corner's x position of the image
         self.y = yPosition  # self.y is the top left corner's y position of the image
-        self.speed = speed + 1.5
+        self.speed = speed
         self.screen = screen
         self.image = pygame.image.load('ping-pong.png')
         self.image = pygame.transform.scale(self.image, (25, 25))
@@ -64,7 +64,7 @@ class Ball:
             # self.moveDirection = 'UP'
 
     def draw(self):
-        self.screen.blit(self.image, (self.x, self.y))
+        self.screen.blit(self.image, (self.x, self.y ))
     
     def update(self, player1: Player, player2: Player):
         if self.isMoving:
