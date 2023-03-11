@@ -12,6 +12,7 @@ class Ball:
         self.screen = screen
         self.image = pygame.image.load('ping-pong.png')
         self.image = pygame.transform.scale(self.image, (25, 25))
+        self.whoHasBall = 'PLAYER1'
         list1 = [1, 2, 3]
         r1 = random.choice(list1)
         if r1 == 1:
@@ -22,7 +23,6 @@ class Ball:
             self.moveDirection = 'UP-RIGHT'
         self.isMoving = False
 
-    
     def moveLeft(self):
         self.x = self.x - self.speed
         # Detect collision with screen left
@@ -43,50 +43,51 @@ class Ball:
             elif self.moveDirection == 'DOWN-RIGHT':
                 self.moveDirection = 'DOWN-LEFT'
 
-    def moveUp(self,player1: Player):
+    def moveUp(self, player1: Player, player2: Player):
         self.y = self.y - self.speed
         # Detect collision with screen up
         if self.y < 0:
-            player1.increase()
+            player1.decreaseLife()
+            player2.increaseScore()
+            player2.increaseScore()
+            self.whoHasBall = 'PLAYER1'
             self.isMoving = False
-            # self.y = 0
-            # # Player 1 won
-            # self.moveDirection = 'DOWN'
 
-    def moveDown(self,player2: Player):
+    def moveDown(self, player1: Player, player2: Player):
         self.y = self.y + self.speed
         # Detect collision with screen down
         if self.y > (self.screen.get_height() - self.image.get_height()):
-            player2.increase()
+            player2.decreaseLife()
+            player1.increaseScore()
+            player1.increaseScore()
+            self.whoHasBall = 'PLAYER2'
             self.isMoving = False
-            # Player 2 won
-            # self.y = self.screen.get_height() - self.image.get_height()
-            # self.moveDirection = 'UP'
 
     def draw(self):
-        self.screen.blit(self.image, (self.x, self.y ))
-    
+        self.screen.blit(self.image, (self.x, self.y))
+
     def update(self, player1: Player, player2: Player):
         if self.isMoving:
             if self.moveDirection == 'UP':
-                self.moveUp(player1)
+                self.moveUp(player1, player2)
             elif self.moveDirection == 'DOWN':
-                self.moveDown(player2)
+                self.moveDown(player1, player2)
             elif self.moveDirection == 'UP-RIGHT':
-                self.moveUp(player1)
+                self.moveUp(player1, player2)
                 self.moveRight()
             elif self.moveDirection == 'DOWN-RIGHT':
-                self.moveDown(player2)
+                self.moveDown(player1, player2)
                 self.moveRight()
             elif self.moveDirection == 'UP-LEFT':
-                self.moveUp(player1)
+                self.moveUp(player1, player2)
                 self.moveLeft()
             elif self.moveDirection == 'DOWN-LEFT':
-                self.moveDown(player2)
+                self.moveDown(player1, player2)
                 self.moveLeft()
 
-            if (self.y >= player2.y and self.y <= player2.y + player2.image.get_height()) and (self.x >=player2.x and self.x<=player2.x+player2.image.get_width()):
-                # player2.increase()
+            if (self.y >= player2.y and self.y <= player2.y + player2.image.get_height()) \
+                    and (self.x >= player2.x and self.x <= player2.x + player2.image.get_width()):
+                player2.increaseScore()
                 if self.moveDirection == 'UP':
                     list1 = [1, 2, 3]
                     r1 = random.choice(list1)
@@ -98,8 +99,9 @@ class Ball:
                         self.moveDirection = 'DOWN-RIGHT'
                 else:
                     self.moveDirection = 'DOWN'
-            elif (self.y >= player1.y and self.y <= player1.y + player1.image.get_height()) and (self.x >=player1.x and self.x<=player1.x+player1.image.get_width()):
-                # player1.increase()
+            elif (self.y >= player1.y and self.y <= player1.y + player1.image.get_height()) \
+                    and (self.x >= player1.x and self.x <= player1.x + player1.image.get_width()):
+                player1.increaseScore()
                 if self.moveDirection == 'DOWN':
                     list1 = [1, 2, 3]
                     r1 = random.choice(list1)
@@ -113,7 +115,13 @@ class Ball:
                     self.moveDirection = 'UP'
 
         else:
-            self.x = player1.x + ((player1.image.get_width()/2) - (self.image.get_width()/2))
-            self.y = player1.y - self.image.get_height() - 5
-        
+            if self.whoHasBall == 'PLAYER1':
+                self.moveDirection = 'UP'
+                self.x = player1.x + ((player1.image.get_width() / 2) - (self.image.get_width() / 2))
+                self.y = player1.y - self.image.get_height()
+            else:
+                self.moveDirection = 'DOWN'
+                self.x = player2.x + ((player1.image.get_width() / 2) - (self.image.get_width() / 2))
+                self.y = player2.y + self.image.get_height() + 5
+
         self.draw()
