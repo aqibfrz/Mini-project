@@ -47,20 +47,20 @@ class Ball:
         self.y = self.y - self.speed
         # Detect collision with screen up
         if self.y < 0:
-            player1.decreaseLife()
-            player2.increaseScore()
-            player2.increaseScore()
-            self.whoHasBall = 'PLAYER1'
+            player2.decreaseLife()
+            player1.increaseScore()
+            player1.increaseScore()
+            self.whoHasBall = 'PLAYER2'
             self.isMoving = False
 
     def moveDown(self, player1: Player, player2: Player):
         self.y = self.y + self.speed
         # Detect collision with screen down
         if self.y > (self.screen.get_height() - self.image.get_height()):
-            player2.decreaseLife()
-            player1.increaseScore()
-            player1.increaseScore()
-            self.whoHasBall = 'PLAYER2'
+            player1.decreaseLife()
+            player2.increaseScore()
+            player2.increaseScore()
+            self.whoHasBall = 'PLAYER1'
             self.isMoving = False
 
     def draw(self):
